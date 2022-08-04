@@ -1,0 +1,41 @@
+import io.qameta.allure.Description;
+import io.qameta.allure.Owner;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+@ExtendWith(logclass.class)
+public class MailData {
+    public final static String href = "https://django-helpdesk-demo.herokuapp.com/";
+    public final static String hrefOfMail ="https://mail.ru/";
+    public final static String DriverName ="webdriver.chrome.driver" ;
+    public final static String DriverPath = "D:\\Browser drivers\\chromedriver.exe";
+    public final static String mailAddress1 ="//input[@name=\"submitter_email\"]";
+    public final static String mailSummary1 ="//input[@name=\"title\"]";
+    public final static String description1 ="//textarea[@name=\"body\"]" ;
+    public final static String IdOFQueue1 = "id_queue";
+    public final static String QueueVal1 ="//option[@value=\"1\"]";
+    public final static String Priorities1 = "priority";
+    public final static String PropPrior1 ="//option[@value=\"1\"]";
+    public final static String DueOn1 = "//input[@name=\"due_date\"]";
+    public final static String dueOnDate1 ="//table[@class='ui-datepicker-calendar']//a[text()='3']";
+    public final static String AttachFile1 ="//input[@name=\"attachment\"]";
+    public final static String Subm1 ="//button[@type=\"submit\"]";
+    public static final String idHref1 = "userDropdown";
+    public static final String login1 = "username";
+    public static final String pass1 ="password";
+    public static final String URL11 = "https://django-helpdesk-demo.herokuapp.com/view/?ticket=billing-68761&email=dimas1beer%40mail.ru&key=c4b6c764-c550-4ca9-a6d6-c809897a1be5";
+    public static final String URL22 ="https://django-helpdesk-demo.herokuapp.com/tickets/";
+
+    @Test
+    @Owner("Dima")
+    @Description("UI Testing")
+    public void form_testing(){
+        MailTesting MT = new MailTesting();
+        MT.settingDriver(DriverName,DriverPath,href);
+        MT.FillForm(mailAddress1,mailSummary1,description1
+                ,IdOFQueue1,QueueVal1,Priorities1,PropPrior1,DueOn1,dueOnDate1,AttachFile1,Subm1);
+        MT.authorization(idHref1,login1,pass1,URL22);
+       // MT.stopDriver();
+
+    }
+}
