@@ -1,0 +1,77 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+
+import java.net.URL;
+
+public class MailTesting  {
+   public  static  ChromeDriver dr;
+    public void settingDriver(String set1,String set2,String aHref){
+        System.setProperty(set1,set2);
+        dr = new ChromeDriver();
+        dr.get(aHref);
+
+    }
+    public void FillForm(String mailAdr,String mailSummary,String description
+            ,String IdOFQueue,String QueueVal,String Priorities
+            ,String PropPrior,String DueOn,String dueOnDate,String AttachFile,String Subm){
+
+        WebElement mailAddress = dr.findElement(By.xpath(mailAdr));
+        WebElement summary = dr.findElement(By.xpath(mailSummary));
+        WebElement descriptions = dr.findElement(By.xpath(description));
+        WebElement Queue = dr.findElement(By.id(IdOFQueue));
+
+        Queue.click();
+
+        WebElement QueueValue = dr.findElement(By.xpath(QueueVal));
+
+        QueueValue.click();
+        summary.click();
+        summary.sendKeys("Program aint work");
+        descriptions.click();
+        descriptions.sendKeys("Program have a problem with operation");
+
+        WebElement Priority = dr.findElement(By.name(Priorities));
+
+        Priority.click();
+
+        WebElement PriorityProperty = dr.findElement(By.xpath(PropPrior));
+
+        PriorityProperty.click();
+
+        WebElement due = dr.findElement(By.xpath(DueOn));
+        due.click();
+        WebElement dueOfDate = dr.findElement(By.xpath(dueOnDate));
+        dueOfDate.click();
+        WebElement Attach = dr.findElement(By.xpath(AttachFile));
+
+        mailAddress.click();
+        mailAddress.sendKeys("dimas1beer@mail.ru");
+        WebElement Submit = dr.findElement(By.xpath(Subm));
+        Submit.click();
+
+       //tring a =  dr.getTitle();
+        // System.out.println(a);
+        Assert.assertTrue(dr.getCurrentUrl().contains("ticket"));
+
+    }
+
+
+    public void authorization(String idHref,String login,String passwords,String URL2){
+    WebElement authorizationHref = dr.findElement(By.id(idHref));
+    authorizationHref.click();
+    WebElement log = dr.findElement(By.id(login));
+    WebElement pass = dr.findElement(By.id(passwords));
+
+    log.sendKeys("demo");
+
+    pass.sendKeys("demo1234",Keys.ENTER);
+    Assert.assertTrue(dr.getCurrentUrl().startsWith(URL2));
+
+
+
+    }
+  
+}
